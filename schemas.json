@@ -1,59 +1,38 @@
 {
   "schemas": {
     "version": "1.0.0",
-    "form": {
-      "message": {
-        "example-01": {
-          "angular": {
-            "schema": ["*"]
-          }
-        }
-      }
-    },
+    "form": {},
     "configure": {
       "my-default-config": {
         "type": "object",
         "properties": {
           "options": {
-            "type" : "object",
-            "properties" : {
-              "example" : {
-                "type" : "string"
+            "type": "object",
+            "properties": {
+              "ipAddress": {
+                "type": "string",
+                "required": true
+              },
+              "apiUsername": {
+                "type": "string",
+                "required": true,
+                "default": "newdeveloper"
+              },
+              "sensorName": {
+                "type": "string",
+                "required": true,
+                "default": "Hue Tap 1"
+              },
+              "sensorPollInterval": {
+                "type": "integer",
+                "required": true,
+                "default": 5000
               }
             }
           }
         }
       }
     },
-    "message": {
-      "example-message-01": {
-        "type": "object",
-        "properties": {
-          "example-opt": {
-            "type": "string"
-          },
-          "another-example-opt":{
-            "type": "string"
-          }
-        },
-        "x-form-schema": {
-          "angular": "message.example-01.angular"
-        },
-        "x-group-name": "Message Example Group",
-        "required": ["example-opt", "another-example-opt"]
-      },
-      "example-message-02": {
-        "type": "object",
-        "properties": {
-          "some-opt": {
-            "type": "string"
-          },
-          "another-some-opt":{
-            "type": "string"
-          }
-        },
-        "required": ["some-opt", "another-some-opt"]
-      }
-    }
+    "message": {}
   }
 }

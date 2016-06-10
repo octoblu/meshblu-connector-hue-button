@@ -1,9 +1,12 @@
 {EventEmitter}  = require 'events'
 debug           = require('debug')('meshblu-connector-hue-button:index')
+_               = require 'lodash'
+HueUtil         = require 'hue-util'
 
 class HueButton extends EventEmitter
   constructor: ->
     debug 'HueButton constructed'
+    @options = {}
 
   isOnline: (callback) =>
     callback null, running: true
@@ -13,17 +16,44 @@ class HueButton extends EventEmitter
     callback()
 
   onMessage: (message) =>
-    { topic, devices, fromUuid } = message
-    return if '*' in devices
-    return if fromUuid == @uuid
-    debug 'on message', { topic }
+    debug 'on message', message
 
-  onConfig: (device) =>
-    { @options } = device
-    debug 'on config', @options
+  onConfig: (device={}) =>
+    debug 'on config', apikey: device.apikey
+    @apikey = device.apikey || {}
+    @setOptions device.options
+
+  setOptions: (options={}) =>
+    debug 'setOptions', options
+    defaults = apiUsername: 'octoblu', sensorPollInterval: 5000
+    @options = _.extend defaults, options
+
+    if @options.apiUsername != @apikey?.devicetype
+      @apikey =
+        devicetype: @options.apiUsername
+        username: null
+
+    @hue = new HueUtil @options.apiUsername, @options.ipAddress, @apikey?.username, @onUsernameChange
+
+    clearInterval @pollInterval
+    @pollInterval = setInterval @checkSensors, @options.sensorPollInterval
+
+  onUsernameChange: (username) =>
+    debug 'onUsernameChange', username
+    @apikey.username = username
+    @emit 'update', apikey: @apikey
+
+  checkSensors: =>
+    debug 'checking sensors'
+    @hue.checkButtons @options.sensorName, (error, response) =>
+      return console.error error if error?
+      return if _.isEqual @lastState, response.state
+      @lastState = response.state
+      @emit 'message', devices: ['*'], topic: 'click', payload: button: response.button
 
   start: (device) =>
     { @uuid } = device
     debug 'started', @uuid
+    @onConfig device
 
 module.exports = HueButton

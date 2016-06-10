@@ -49,7 +49,7 @@ class HueButton extends EventEmitter
       return console.error error if error?
       return if _.isEqual @lastState, response.state
       @lastState = response.state
-      @emit 'message', devices: ['*'], topic: 'click', payload: button: response.button
+      @emit 'message', devices: ['*'], topic: 'click', data: button: response.button
 
   start: (device) =>
     { @uuid } = device

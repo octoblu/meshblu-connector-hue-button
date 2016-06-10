@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-hue-button",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Meshblu Connector ",
   "homepage": "https://github.com/octoblu/hue-button",
   "bugs": "https://github.com/octoblu/hue-button/issues",

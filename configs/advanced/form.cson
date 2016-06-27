@@ -1,0 +1,6 @@
+angular: [
+  { key: "options.ipAddress" }
+  { key: "options.apiUsername" }
+  { key: "options.sensorName" }
+  { key: "options.sensorPollInterval" }
+]

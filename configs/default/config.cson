@@ -1,0 +1,20 @@
+title: "Default Configuration"
+type: "object"
+properties:
+  options:
+    type: "object"
+    properties:
+      sensorName:
+        type: "string"
+        default: "Hue Tap 1"
+      sensorPollInterval:
+        type: "integer"
+        minimum: 500
+        default: 5000
+    required: [
+      "sensorName"
+      "sensorPollInterval"
+    ]
+required: [
+  "options"
+]

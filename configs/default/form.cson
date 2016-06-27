@@ -1,0 +1,4 @@
+angular: [
+  { key: "options.sensorName" }
+  { key: "options.sensorPollInterval" }
+]

@@ -1,59 +1,40 @@
 {EventEmitter}  = require 'events'
-debug           = require('debug')('meshblu-connector-hue-button:index')
-_               = require 'lodash'
-HueUtil         = require 'hue-util'
+debug           = require('debug')('meshblu-connector-hue:index')
+HueManager      = require './hue-manager'
 
-class HueButton extends EventEmitter
+class Connector extends EventEmitter
   constructor: ->
-    debug 'HueButton constructed'
-    @options = {}
+    @hue = new HueManager
+    @hue.on 'change:username', @_onUsernameChange
+    @hue.on 'click', @_onClick
 
   isOnline: (callback) =>
     callback null, running: true
 
   close: (callback) =>
     debug 'on close'
-    callback()
+    @hue.close callback
 
-  onMessage: (message) =>
-    debug 'on message', message
+  onConfig: (device={}, callback=->) =>
+    { @options, apikey } = device
+    debug 'on config', @options
+    { ipAddress, apiUsername, sensorName, sensorPollInterval } = @options ? {}
+    @hue.connect { ipAddress, apiUsername, sensorName, sensorPollInterval, apikey }, (error) =>
+      return callback error if error?
+      callback()
 
-  onConfig: (device={}) =>
-    debug 'on config', apikey: device.apikey
-    @apikey = device.apikey || {}
-    @setOptions device.options
+  start: (device, callback) =>
+    debug 'started'
+    @onConfig device, callback
 
-  setOptions: (options={}) =>
-    debug 'setOptions', options
-    defaults = apiUsername: 'octoblu', sensorPollInterval: 5000
-    @options = _.extend defaults, options
+  _onUsernameChange: ({apikey}) =>
+    @emit 'update', {apikey}
 
-    if @options.apiUsername != @apikey?.devicetype
-      @apikey =
-        devicetype: @options.apiUsername
-        username: null
+  _onClick: ({button, state}) =>
+    data =
+      action: 'click'
+      button: button
+      state: state
+    @emit 'message', {devices: ['*'], data}
 
-    @hue = new HueUtil @options.apiUsername, @options.ipAddress, @apikey?.username, @onUsernameChange
-
-    clearInterval @pollInterval
-    @pollInterval = setInterval @checkSensors, @options.sensorPollInterval
-
-  onUsernameChange: (username) =>
-    debug 'onUsernameChange', username
-    @apikey.username = username
-    @emit 'update', apikey: @apikey
-
-  checkSensors: =>
-    debug 'checking sensors'
-    @hue.checkButtons @options.sensorName, (error, response) =>
-      return console.error error if error?
-      return if _.isEqual @lastState, response.state
-      @lastState = response.state
-      @emit 'message', devices: ['*'], topic: 'click', data: button: response.button
-
-  start: (device) =>
-    { @uuid } = device
-    debug 'started', @uuid
-    @onConfig device
-
-module.exports = HueButton
+module.exports = Connector

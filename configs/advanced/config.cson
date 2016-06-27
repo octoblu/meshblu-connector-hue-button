@@ -1,0 +1,29 @@
+title: "Advanced Configuration"
+type: "object"
+properties:
+  options:
+    title: "Options"
+    type: "object"
+    properties:
+      ipAddress:
+        title: "Bridge IP Address"
+        type: "string"
+      apiUsername:
+        title: "API Username"
+        type: "string"
+        default: "newdeveloper"
+      sensorName:
+        type: "string"
+        default: "Hue Tap 1"
+      sensorPollInterval:
+        type: "integer"
+        minimum: 500
+        default: 5000
+    required: [
+      "apiUsername"
+      "sensorName"
+      "sensorPollInterval"
+    ]
+required: [
+  "options"
+]

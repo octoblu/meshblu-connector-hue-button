@@ -36,6 +36,7 @@ describe 'HueManager', ->
     describe '->pollSensor', ->
       describe 'the first time', ->
         beforeEach (done) ->
+          @sut.previousResult = null
           @sut.once 'click', ({@button}) =>
             done()
           @sut._pollSensor =>

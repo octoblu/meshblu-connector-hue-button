@@ -32,23 +32,3 @@ describe 'HueManager', ->
         @sut._checkButtons.restore()
         @hue.checkButtons = sinon.stub().yields null, state: 'ok', button: 'hi'
         done error
-
-    describe '->pollSensor', ->
-      describe 'the first time', ->
-        beforeEach (done) ->
-          @sut.previousResult = null
-          @sut.once 'click', ({@button}) =>
-            done()
-          @sut._pollSensor =>
-
-        it 'should emit click', ->
-          expect(@sut.emit).to.have.been.calledWith 'click', button: 'hi', state: 'ok'
-
-      describe 'when previousResult is the same', ->
-        beforeEach (done) ->
-          @sut.previousResult = state: 'bar', button: 'foo'
-          @hue.checkButtons = sinon.stub().yields null, state: 'bar', button: 'foo'
-          @sut._pollSensor done
-
-        it 'should not emit', ->
-          expect(@sut.emit).not.to.have.been.called

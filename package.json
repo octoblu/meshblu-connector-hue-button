@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "meshblu-connector-runner",
-    "test": "mocha",
+    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul && mocha --reporter json > coverage/mocha.json",
     "package": "meshblu-connector-packager",
     "generate:package": "meshblu-connector-packager",
     "generate:schema": "meshblu-connector-schema-generator > schemas.json"

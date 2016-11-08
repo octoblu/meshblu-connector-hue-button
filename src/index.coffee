@@ -7,6 +7,8 @@ class Connector extends EventEmitter
     @hue = new HueManager
     @hue.on 'change:username', @_onUsernameChange
     @hue.on 'click', @_onClick
+    @hue.on 'error', (error) =>
+      @emit 'error', error
 
   isOnline: (callback) =>
     callback null, running: true

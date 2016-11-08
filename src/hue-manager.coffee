@@ -36,7 +36,10 @@ class HueManager extends EventEmitter
     @apikey.username = username
     @_emit 'change:username', {@apikey}
 
-  _pollSensor: (callback=->) =>
+  _pollSensor: (callback) =>
+    callback ?= (error) =>
+      @emit 'error', error if error?
+
     @_checkButtons (error, result) =>
       return callback error if error?
       {state, button} = result ? {}

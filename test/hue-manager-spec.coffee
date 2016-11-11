@@ -5,6 +5,7 @@ describe 'HueManager', ->
     @sut = new HueManager
     @sut.emit = sinon.spy @sut.emit
     sinon.stub(@sut, '_checkButtons').yields null
+    @sut.verify = sinon.stub().yields null
 
   afterEach (done) ->
     @sut.close done

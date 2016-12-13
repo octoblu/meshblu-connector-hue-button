@@ -18,7 +18,7 @@ class Connector extends EventEmitter
     @hue.close callback
 
   onConfig: (@device={}, callback=->) =>
-    { @options, apikey } = device
+    { @options, apikey } = @device
     debug 'on config', @options
     { ipAddress, apiUsername, sensorName, sensorPollInterval } = @options ? {}
     @hue.connect { ipAddress, apiUsername, sensorName, sensorPollInterval, apikey }, (error) =>

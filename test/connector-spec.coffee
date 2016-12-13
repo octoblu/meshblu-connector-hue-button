@@ -36,6 +36,7 @@ describe 'Connector', ->
         action: 'click'
         button: 'tapppy'
         state: 'arizona'
+        device: {}
       expect(@sut.emit).to.have.been.calledWith 'message', {devices: ['*'], data}
 
   describe '->isOnline', ->

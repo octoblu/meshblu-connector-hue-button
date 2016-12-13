@@ -17,7 +17,7 @@ class Connector extends EventEmitter
     debug 'on close'
     @hue.close callback
 
-  onConfig: (device={}, callback=->) =>
+  onConfig: (@device={}, callback=->) =>
     { @options, apikey } = device
     debug 'on config', @options
     { ipAddress, apiUsername, sensorName, sensorPollInterval } = @options ? {}
@@ -33,10 +33,12 @@ class Connector extends EventEmitter
     @emit 'update', {apikey}
 
   _onClick: ({button, state}) =>
-    data =
+    data = {
       action: 'click'
-      button: button
-      state: state
+      button
+      state
+      @device
+    }
     @emit 'message', {devices: ['*'], data}
 
 module.exports = Connector

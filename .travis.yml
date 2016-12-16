@@ -33,6 +33,7 @@ cache:
   directories:
   - node_modules
   - $HOME/.nvm
+  - $HOME/.yarn-cache
 before_install:
 - ulimit -c unlimited -S
 - PACKAGER_URL="https://meshblu-connector.octoblu.com/tools/packager/latest"
@@ -40,7 +41,8 @@ before_install:
 - chmod +x /tmp/travis_install_node.sh
 - ". /tmp/travis_install_node.sh"
 - if [ "$TRAVIS_OS_NAME" == "linux" -a "$MAIN_BUILD" == "true" ]; then export NPM_PUBLISH="true"; fi
-- npm install --global yarn
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH=$HOME/.yarn/bin:$PATH
 install:
 - yarn install
 script:

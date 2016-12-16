@@ -28,7 +28,7 @@ before_deploy:
       } else {
         $env:PACKAGER_ARCH="amd64"
       }
-  - yarn install --production
+  # disable for now - yarn install --production
   - npm install meshblu-connector-packager
   - yarn run generate:package
   - ps: $root = Resolve-Path deploy; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName Connector }

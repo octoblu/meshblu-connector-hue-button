@@ -1,9 +1,9 @@
 {
   "name": "meshblu-connector-hue-button",
-  "version": "2.2.2",
-  "description": "Meshblu Connector ",
-  "homepage": "https://github.com/octoblu/hue-button",
-  "bugs": "https://github.com/octoblu/hue-button/issues",
+  "version": "2.2.3",
+  "description": "Meshblu Connector for the Phillips Hue Button",
+  "homepage": "https://github.com/octoblu/meshblu-connector-hue-button",
+  "bugs": "https://github.com/octoblu/meshblu-connector-hue-button/issues",
   "author": {
     "name": "Octoblu",
     "url": "https://github.com/octoblu"
@@ -11,25 +11,21 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/octoblu/hue-button.git"
+    "url": "https://github.com/octoblu/meshblu-connector-hue-button"
   },
   "scripts": {
     "start": "meshblu-connector-runner",
     "test": "mocha",
-    "package": "meshblu-connector-packager",
     "generate:package": "meshblu-connector-packager",
     "generate:schema": "meshblu-connector-schema-generator > schemas.json",
-    "coverage": "nyc npm test",
     "mocha:json": "env NPM_ENV=test mocha --reporter json > coverage/mocha.json",
     "test:watch": "mocha -w -R mocha-multi --reporter-options spec=-,mocha-osx-reporter=-"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "meshblu-connector-packager": "^12.1.1",
     "mocha": "^2.4.5",
     "mocha-multi": "^0.9.1",
     "mocha-osx-reporter": "^0.1.2",
-    "nyc": "^8.3.0",
     "segfault-handler": "^1.0.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
@@ -44,32 +40,8 @@
     "meshblu-connector-runner": "^10.1.2",
     "meshblu-connector-schema-generator": "^2.0.0"
   },
-  "meshbluConnector": {
-    "githubSlug": "octoblu/meshblu-connector-hue-button",
-    "schemasUrl": "https://raw.githubusercontent.com/octoblu/meshblu-connector-hue-button/v1.0.1/schemas.json"
-  },
-  "platformDependencies": {
-    "darwin": [],
-    "win32": [],
-    "win64": [],
-    "linux": [],
-    "android": null,
-    "ios": null
-  },
   "license": "MIT",
   "keywords": [
-    "meshblu-connector",
-    "gateblu"
-  ],
-  "nyc": {
-    "cache": true,
-    "reporter": [
-      "text-summary",
-      "lcov",
-      "json"
-    ],
-    "extension": [
-      ".coffee"
-    ]
-  }
+    "meshblu-connector"
+  ]
 }

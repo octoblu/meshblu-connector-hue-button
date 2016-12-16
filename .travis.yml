@@ -46,11 +46,13 @@ install:
 script:
 - yarn test
 after_success:
-- yarn run coverage
+- yarn install --production
+- yarn global add meshblu-connector-packager
 - yarn run mocha:json
 - bash <(curl -s https://codecov.io/bash)
 - bash <(curl -s https://codecov.octoblu.com/bash)
 before_deploy:
+- yarn install --production
 - yarn run generate:package
 - yarn run generate:schema
 - cp schemas.json deploy

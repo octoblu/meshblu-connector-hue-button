@@ -30,7 +30,7 @@ before_deploy:
       }
   - yarn install --production
   - yarn global add meshblu-connector-packager
-  - yarn run generate:package
+  - meshblu-connector-packager
   - ps: $root = Resolve-Path deploy; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName Connector }
 deploy:
 - provider: GitHub

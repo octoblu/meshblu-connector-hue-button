@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-hue-button",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Meshblu Connector ",
   "homepage": "https://github.com/octoblu/hue-button",
   "bugs": "https://github.com/octoblu/hue-button/issues",
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "meshblu-connector-packager": "^12.1.1",
     "mocha": "^2.4.5",
     "mocha-multi": "^0.9.1",
     "mocha-osx-reporter": "^0.1.2",

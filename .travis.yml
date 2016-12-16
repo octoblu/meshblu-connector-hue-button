@@ -2,6 +2,9 @@ language: cpp
 os:
 - linux
 - osx
+branches:
+  only:
+  - "/^v[0-9]/"
 addons:
   apt:
     sources:
@@ -25,6 +28,11 @@ matrix:
   exclude:
   - os: osx
     env: PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="386"
+cache:
+  yarn: true
+  directories:
+  - node_modules
+  - $HOME/.nvm
 before_install:
 - ulimit -c unlimited -S
 - PACKAGER_URL="https://meshblu-connector.octoblu.com/tools/packager/latest"
@@ -32,18 +40,19 @@ before_install:
 - chmod +x /tmp/travis_install_node.sh
 - ". /tmp/travis_install_node.sh"
 - if [ "$TRAVIS_OS_NAME" == "linux" -a "$MAIN_BUILD" == "true" ]; then export NPM_PUBLISH="true"; fi
+- npm install --global yarn
 install:
-- npm install --build-from-source
+- yarn install
 script:
-- npm test
+- yarn test
+after_success:
+- yarn run coverage
+- yarn run mocha:json
+- bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.octoblu.com/bash)
 before_deploy:
-- npm prune --production
-- npm install meshblu-connector-packager
-- npm dedupe
-- npm install -g flatten-packages
-- flatten-packages
-- npm run generate:package
-- npm run generate:schema
+- yarn run generate:package
+- yarn run generate:schema
 - cp schemas.json deploy
 deploy:
 - provider: releases
@@ -62,11 +71,3 @@ deploy:
   on:
     tags: true
     condition: "$NPM_PUBLISH = true"
-branches:
-  only:
-  - "/^v[0-9]/"
-after_success:
-- npm run coverage
-- npm run mocha:json
-- bash <(curl -s https://codecov.io/bash)
-- bash <(curl -s https://codecov.octoblu.com/bash)

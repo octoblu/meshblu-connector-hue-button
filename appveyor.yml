@@ -3,8 +3,6 @@ environment:
 platform:
   - x64
   - x86
-cache:
- - "%LOCALAPPDATA%/Yarn"
 shallow_clone: true
 skip_non_tags: true
 install:
@@ -17,10 +15,10 @@ install:
   - SET GYP_MSVS_VERSION=2013
   - if "%PLATFORM%" == "x64" set PATH=C:\Python27-x64;%PATH%
   - if "%PLATFORM%" == "x86" SET PATH=C:\python27;%PATH%
-  - yarn install
+  - npm install --build-from-source
 build: off
 test_script:
-- node_modules/.bin/mocha
+  - node_modules/.bin/mocha
 before_deploy:
   - ps: >-
       if($env:platform -eq "x86") {
@@ -28,9 +26,13 @@ before_deploy:
       } else {
         $env:PACKAGER_ARCH="amd64"
       }
-  # disable for now - yarn install --production
+  - npm prune --production
   - npm install meshblu-connector-packager
-  - yarn run generate:package
+  - npm dedupe
+  - npm install -g flatten-packages
+  - flatten-packages
+  - npm run generate:package
+  - npm run generate:schema
   - ps: $root = Resolve-Path deploy; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName Connector }
 deploy:
 - provider: GitHub

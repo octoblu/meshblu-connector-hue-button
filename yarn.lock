@@ -284,13 +284,9 @@ engine.io-parser@1.3.2:
     has-binary "0.1.7"
     wtf-8 "1.0.0"
 
-escape-string-regexp@1.0.5:
+escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
-
-escape-string-regexp@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.2.tgz#4dbc2fe674e71949caf3fb2695ce7f2dc1d9a8d1"
 
 extend@~3.0.0:
   version "3.0.0"
@@ -668,9 +664,9 @@ meshblu-config@^6.3.0:
     lodash "^3.9.1"
     meshblu-encryption "^2.0.1"
 
-meshblu-connector-runner@^10.1.2:
-  version "10.1.2"
-  resolved "https://registry.yarnpkg.com/meshblu-connector-runner/-/meshblu-connector-runner-10.1.2.tgz#2744558afabbde5920f0e5d49812a004f7309707"
+meshblu-connector-runner@^10.2.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/meshblu-connector-runner/-/meshblu-connector-runner-10.2.0.tgz#16f175403cfcd451662d0f6f6ccccb48bbfdebde"
   dependencies:
     async "^2.0.0-rc.6"
     bunyan "^1.8.1"

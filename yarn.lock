@@ -239,7 +239,13 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.6.1:
+debug@^2.1.1, debug@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.2.tgz#dfa96a861ee9b8c2f29349b3bcc41aa599a71e0f"
+  dependencies:
+    ms "0.7.2"
+
+debug@^2.2.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
@@ -710,9 +716,9 @@ meshblu-config@^6.4.3:
     lodash "^3.9.1"
     meshblu-encryption "^2.0.1"
 
-meshblu-connector-runner@^10.3.2:
-  version "10.3.2"
-  resolved "https://registry.yarnpkg.com/meshblu-connector-runner/-/meshblu-connector-runner-10.3.2.tgz#58f44459143688af3fc0730f1c0de80eb16f95e1"
+meshblu-connector-runner@^10.4.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/meshblu-connector-runner/-/meshblu-connector-runner-10.4.0.tgz#3dc900fb5286dad19af1e463656021cc5ed2f652"
   dependencies:
     async "^2.1.5"
     bunyan "^1.8.5"

@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-hue-button",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "description": "Meshblu Connector for the Phillips Hue Button",
   "homepage": "https://github.com/octoblu/meshblu-connector-hue-button",
   "bugs": "https://github.com/octoblu/meshblu-connector-hue-button/issues",
@@ -31,13 +31,13 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "coffee-script": "^1.12.4",
+    "coffee-script": "^1.12.5",
     "debug": "^2.6.3",
     "fs-cson": "^0.3.2",
     "hue-util": "^2.2.2",
     "lodash": "^4.17.4",
     "meshblu-config": "^7.0.0",
-    "meshblu-connector-runner": "^10.5.3",
+    "meshblu-connector-runner": "^10.6.0",
     "meshblu-connector-schema-generator": "^2.0.0"
   },
   "meshbluConnector": {
